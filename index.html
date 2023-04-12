@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Sirui Liu's Homepage</title>
+	  
   </head>
   <body>
     <h1>人员查询</h1>
@@ -14,24 +15,29 @@
 	部门：<input type="text" id="depart">
 	种类：<input type="text" id="kind">  
 	  
-   <button>查询</button>
+	<button>查询</button>
 	  
 	  
-    <script>
+   <script>
+	  const button = document.querySelector('button');
 	  let name;
 	  let nameabbr;
 	  let depart;
 	  let kind;
-	  const button = document.querySelector('button');
-      name = document.getElementById("name").value;
+	  button.onclick = function() {
+	name = document.getElementById("name").value;
 	  nameabbr = document.getElementById("nameabbr").value;
 	  depart = document.getElementById("depart").value;
 	  kind = document.getElementById("kind").value;
-	  button.onclick = function() {
-  alert( name + nameabbr ', nice to see you!')；
-      }
+      fetch('https://portal.pku.edu.cn/portal2017/publicquery/personquery/query.do?deptId='+ depart +'&name='+ name +'&nameAbbr='+ nameabbr +'&personType='+ kind)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+		  
+  alert('Hello ' +name+ nameabbr+ ', nice to see you!');
+     }
 	  
-    </script> 
+   </script> 
     
     
     
